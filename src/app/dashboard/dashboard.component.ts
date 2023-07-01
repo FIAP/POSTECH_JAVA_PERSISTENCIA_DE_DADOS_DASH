@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { DashService } from '../layouts/admin-layout/services/dash.service';
+import { DashboardService } from '../layouts/admin-layout/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,7 +59,7 @@ export class DashboardComponent implements OnInit {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
-  constructor() { }
+  constructor(private _dashService: DashboardService) { }
 
   ngOnInit() {
     this.chartColor = "#FFFFFF";
@@ -404,7 +406,12 @@ export class DashboardComponent implements OnInit {
 
   getDashData() {
 
-    
+    let result = [];
+    this._dashService.getAllStudents().subscribe(data => {     
+      data.forEach(element => {
+        result.push(element[1])
+      });
+    });
 
     let data = {
       label: "Data",
@@ -414,7 +421,7 @@ export class DashboardComponent implements OnInit {
       pointRadius: 5,
       fill: true,
       borderWidth: 2,
-      data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
+      data: result
     }
 
     this.lineBigDashboardChartData.push(data);

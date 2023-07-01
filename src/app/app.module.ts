@@ -12,6 +12,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { DashService } from './layouts/admin-layout/services/dash.service';
 
 
 @NgModule({
@@ -28,9 +29,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent
-
-  ],
-  providers: [],
+  ],providers:[DashService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
